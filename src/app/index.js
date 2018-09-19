@@ -1,6 +1,16 @@
 import React from 'react';
-import {render} from 'react-dom';
+import { render } from 'react-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 
-import App from './App';
+import Tasks from './views/Tasks';
+import Home from './views/Home';
 
-render(<App/>, document.getElementById('app'));
+render(
+    <HashRouter>
+        <Switch>
+            <Route exact path='/' component={Home} />
+            <Route path='/tasks' component={Tasks} />
+        </Switch>
+    </HashRouter>,
+    document.getElementById('app')
+);

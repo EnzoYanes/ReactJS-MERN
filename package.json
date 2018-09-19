@@ -16,7 +16,9 @@
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "mongoose": "^5.2.12",
-    "morgan": "^1.9.0"
+    "morgan": "^1.9.0",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

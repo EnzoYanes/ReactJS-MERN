@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 
-class App extends Component{
+class Tasks extends Component{
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             _id: '',
             title: '',
@@ -52,7 +52,6 @@ class App extends Component{
 
     componentDidMount(){
         this.fetchTasks();
-        
     }
 
     fetchTasks(){
@@ -101,11 +100,12 @@ class App extends Component{
 
     render() {
         return (
-            <div>
+            <div className="App">
                 {/* NAVIGATION */}
                 <nav className="light-blue darken-4">
                     <div className="container">
                         <a className="brand-logo" href="/">MERN Stack</a>
+                        <a className="brand-logo right" href="/" >Exit</a>
                     </div>
                 </nav>
 
@@ -170,4 +170,4 @@ class App extends Component{
     }
 }
 
-export default App;
+export default Tasks;
