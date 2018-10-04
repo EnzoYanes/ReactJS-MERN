@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const Task = require('../models/task');
+const User = require('../models/user');
 
 router.get('/', async (req, res) => {
     const tasks = await Task.find();
@@ -30,6 +31,23 @@ router.put('/:id', async(req, res) => {
 router.delete('/:id', async (req, res) => {
     await Task.findByIdAndRemove(req.params.id);
     res.json({status: 'Task Deleted'});
+});
+
+router.post('/register', async(req, res) => {
+    const { username, password} = req.body;
+    const user = new User({username, password});
+    await user.save();
+    res.json({status: 'User Saved'});
+});
+
+router.post('/login', async(req, res) => {
+    const { username, password} = req.body;
+    User.findOne({username: username}, (error, usuario) => {
+        if(error) throw error;
+        usuario.comparePassword(password, (err, isMatch) => {
+            if(err) throw err;
+        });
+    })
 });
 
 module.exports = router;

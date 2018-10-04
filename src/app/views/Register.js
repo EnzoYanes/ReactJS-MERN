@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 
-class Home extends Component{
+class Register extends Component{
 
     constructor(props){
         super(props);
@@ -9,8 +8,8 @@ class Home extends Component{
             username: '',
             password: ''
         };
-        this.login = this.login.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.addUser = this.addUser.bind(this);
     }
 
     handleChange(e){
@@ -20,10 +19,22 @@ class Home extends Component{
         });
     }
 
-    login(e){
-        axios.post('/api/tasks/login', this.state)
-            .then(M.toast({html: 'User or Password incorrect'}))
-            .catch(err => console.error(err));
+    addUser(e){
+        fetch('/api/tasks/register', {
+            method: 'POST',
+            body: JSON.stringify(this.state),
+            headers:{
+                'Accept': 'application/jason',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            M.toast({html: 'User created'});
+            this.props.history.push("/");
+        })
+        .catch(error => console.error(error));
+        e.preventDefault();
     }
 
     render(){
@@ -31,14 +42,14 @@ class Home extends Component{
             <div className="container">
                 <div className="row">
                     <div className="col s5">
-                        <h1>Bienvenidos!</h1>
-                        <form onSubmit={this.login}>
+                        <h1>Registro</h1>
+                        <form onSubmit={this.addUser}>
                             <input name="username" value={this.state.username} onChange={this.handleChange} type="text" placeholder="username" />
                             <input name="password" value={this.state.password} onChange={this.handleChange} type="password" placeholder="password" />
 
-                            <button type="submit" className="btn light-blue darken-4">Iniciar</button>
-                            <a className="btn light-blue darken-4 right" href="#/register">Registrarse</a>
+                            <button type="submit" className="btn light-blue darken-4">Crear</button>
                         </form>
+                        
                     </div>
                 </div>
                 
@@ -47,4 +58,4 @@ class Home extends Component{
     }
 }
 
-export default Home;
+export default Register;
