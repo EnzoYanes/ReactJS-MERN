@@ -30,13 +30,12 @@ class Register extends Component{
         })
         .then(res => res.json())
         .then(data => {
-            //M.toast({html: 'User created'});   
-            //this.props.history.push("/");
-            if(data.ok){
-                M.toast({html: 'Sirve true'});
+            if(data.status){
+                M.toast({html: data.status});
             }
             else{
-                M.toast({html: 'no entro'});
+                M.toast({html: 'User created'});   
+                this.props.history.push("/");
             }
         })
         .catch(error => console.log(error));

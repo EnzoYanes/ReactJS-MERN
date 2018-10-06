@@ -40,9 +40,9 @@ router.post('/register', async(req, res) => {
         if (!usuario) {
             const user = new User({username, password});
             user.save();
-            res.json({status: 'User Saved'});
+            res.json({ok: true});
         } else {
-            res.json({status: "Exist this user"});
+            res.json({status: "Exist this username"});
         }
     })
     
