@@ -35,11 +35,10 @@ router.delete('/:id', async (req, res) => {
 });
 
 router.post('/register', async(req, res) => {
-    //const { username, password} = req.body;
-    //const user = new User({username, password});
-    //await user.save();
-    res.json({ok: false});
-    //res.status(500).json({ error: 'something is wrong' });
+    const { username, password} = req.body;
+    const user = new User({username, password});
+    await user.save();
+    res.json({status: 'User Saved'});
 });
 
 router.post('/login', (req, res) => {
