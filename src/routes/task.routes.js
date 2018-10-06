@@ -36,9 +36,16 @@ router.delete('/:id', async (req, res) => {
 
 router.post('/register', async(req, res) => {
     const { username, password} = req.body;
-    const user = new User({username, password});
-    await user.save();
-    res.json({status: 'User Saved'});
+    User.findOne({username: username}, (error, usuario) => {
+        if (!usuario) {
+            const user = new User({username, password});
+            user.save();
+            res.json({status: 'User Saved'});
+        } else {
+            res.json({status: "Exist this user"});
+        }
+    })
+    
 });
 
 router.post('/login', (req, res) => {
@@ -47,8 +54,9 @@ router.post('/login', (req, res) => {
         if(error) throw error;
         if (usuario) {
             if (bcrypt.compareSync(password, usuario.password)){
-                console.log(usuario);
-                res.redirect('/api/tasks/');
+                res.json({ok: true});
+            }else{
+                res.json({status: 'Invalid password'});
             }
         } else {
             res.json({status: 'User not found'});

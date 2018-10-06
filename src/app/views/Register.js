@@ -33,7 +33,7 @@ class Register extends Component{
             M.toast({html: 'User created'});
             this.props.history.push("/");
         })
-        .catch(error => console.error(error));
+        .catch(error => console.log(error));
         e.preventDefault();
     }
 
