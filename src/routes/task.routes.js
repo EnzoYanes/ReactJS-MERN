@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcryptjs');
 
 const Task = require('../models/task');
 const User = require('../models/user');
@@ -40,13 +41,18 @@ router.post('/register', async(req, res) => {
     res.json({status: 'User Saved'});
 });
 
-router.post('/login', async(req, res) => {
+router.post('/login', (req, res) => {
     const { username, password} = req.body;
     User.findOne({username: username}, (error, usuario) => {
         if(error) throw error;
-        usuario.comparePassword(password, (err, isMatch) => {
-            if(err) throw err;
-        });
+        if (usuario) {
+            if (bcrypt.compareSync(password, usuario.password)){
+                console.log(usuario);
+                res.redirect('/api/tasks/');
+            }
+        } else {
+            res.json({status: 'User not found'});
+        }
     })
 });
 
