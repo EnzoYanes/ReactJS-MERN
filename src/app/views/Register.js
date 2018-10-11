@@ -30,10 +30,15 @@ class Register extends Component{
         })
         .then(res => res.json())
         .then(data => {
-            M.toast({html: 'User created'});
-            this.props.history.push("/");
+            if(data.status){
+                M.toast({html: data.status});
+            }
+            else{
+                M.toast({html: 'Usuario creado'});   
+                this.props.history.push("/");
+            }
         })
-        .catch(error => console.error(error));
+        .catch(error => console.log(error));
         e.preventDefault();
     }
 
@@ -44,10 +49,11 @@ class Register extends Component{
                     <div className="col s5">
                         <h1>Registro</h1>
                         <form onSubmit={this.addUser}>
-                            <input name="username" value={this.state.username} onChange={this.handleChange} type="text" placeholder="username" />
-                            <input name="password" value={this.state.password} onChange={this.handleChange} type="password" placeholder="password" />
+                            <input name="username" value={this.state.username} onChange={this.handleChange} type="text" placeholder="username" required />
+                            <input name="password" value={this.state.password} onChange={this.handleChange} type="password" placeholder="password" required/>
 
                             <button type="submit" className="btn light-blue darken-4">Crear</button>
+                            <a className="btn light-blue darken-4 right" href="/">Inicio</a>
                         </form>
                         
                     </div>

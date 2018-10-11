@@ -1,21 +1,18 @@
 const express = require('express');
-const session = require('express-session');
 const morgan = require('morgan');
 const path = require('path');
 const { mongoose } = require('./database');
-const app = express();
+const bodyParser = require('body-parser');
 
+const app = express();
 // Settings
 app.set('port', process.env.PORT || 3000);
 
 // Middlewares
 app.use(morgan('dev'));
 app.use(express.json());
-app.use(session({
-    secret: 'Esto es un secreto',
-    resave: true,
-    saveUninitialized: true
-}));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes
 app.use('/api/tasks', require('./routes/task.routes'));
