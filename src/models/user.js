@@ -10,17 +10,13 @@ const UserSchema = new Schema({
 
 UserSchema.pre('save', function(next) {
     var user = this;
-
     if(!user.isModified('password')) return next();
     user.password = bcrypt.hashSync(user.password, SALT_WORK_FACTOR);
     next();
 })
 
-UserSchema.methods.comparePassword = function(candidatePassword, cb){
-    bcrypt.compare(candidatePassword, this.password, function(err, isMatch){
-        if(err) return cb(err);
-        cb(null, isMatch);
-    });
+UserSchema.methods.comparePassword = function(password){
+    return bcrypt.compareSync(password, this.password);
 };
 
 module.exports = mongoose.model('User', UserSchema);

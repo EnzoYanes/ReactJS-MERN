@@ -34,7 +34,7 @@ class Register extends Component{
                 M.toast({html: data.status});
             }
             else{
-                M.toast({html: 'User created'});   
+                M.toast({html: 'Usuario creado'});   
                 this.props.history.push("/");
             }
         })
@@ -53,6 +53,7 @@ class Register extends Component{
                             <input name="password" value={this.state.password} onChange={this.handleChange} type="password" placeholder="password" required/>
 
                             <button type="submit" className="btn light-blue darken-4">Crear</button>
+                            <a className="btn light-blue darken-4 right" href="/">Inicio</a>
                         </form>
                         
                     </div>

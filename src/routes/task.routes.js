@@ -1,9 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const Task = require('../models/task');
 const User = require('../models/user');
+
+function generateToken(user) {
+    var u = {
+        _id: user._id,
+        username: user.username
+    };
+    return token = jwt.sign(u, 'secret', { expiresIn: 60*2 });
+}
 
 router.get('/', async (req, res) => {
     const tasks = await Task.find();
@@ -42,7 +50,7 @@ router.post('/register', async(req, res) => {
             user.save();
             res.json({ok: true});
         } else {
-            res.json({status: "Exist this username"});
+            res.json({status: "Existe otro usuario con mismo nombre"});
         }
     })
     
@@ -53,13 +61,17 @@ router.post('/login', (req, res) => {
     User.findOne({username: username}, (error, usuario) => {
         if(error) throw error;
         if (usuario) {
-            if (bcrypt.compareSync(password, usuario.password)){
-                res.json({ok: true});
+            if (usuario.comparePassword(password)){
+                res.json({
+                    ok: true,
+                    user: usuario,
+                    token: generateToken(usuario)
+                });
             }else{
-                res.json({status: 'Invalid password'});
+                res.json({status: 'Contraseña incorrecta'});
             }
         } else {
-            res.json({status: 'User not found'});
+            res.json({status: 'Usuario incorrecto'});
         }
     })
 });
