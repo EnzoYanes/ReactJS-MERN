@@ -26,7 +26,7 @@ class Tasks extends Component{
             })
             .then(res => res.json())
             .then(data => {
-                M.toast({html: 'Task updated'});
+                M.toast({html: 'Tarea actualizada'});
                 this.setState({_id:'', title:'', description:''})
                 this.fetchTasks();
             })
@@ -41,7 +41,7 @@ class Tasks extends Component{
             })
                 .then(res => res.json())
                 .then(data => {
-                    M.toast({html: 'Task saved'});
+                    M.toast({html: 'Tarea guardada'});
                     this.setState({title: '',description:''});
                     this.fetchTasks();
                 })
@@ -73,7 +73,7 @@ class Tasks extends Component{
             })
             .then(res => res.json())
             .then(data => {
-                M.toast({html: 'Task deleted'});
+                M.toast({html: 'Tarea borrada'});
                 this.fetchTasks();
             })
         }
@@ -105,7 +105,7 @@ class Tasks extends Component{
                 <nav className="light-blue darken-4">
                     <div className="container">
                         <a className="brand-logo" href="/">MERN Stack</a>
-                        <a className="brand-logo right" href="/" >Exit</a>
+                        <a className="brand-logo right" href="/" >Salir</a>
                     </div>
                 </nav>
 
@@ -126,7 +126,7 @@ class Tasks extends Component{
                                             </div>
                                         </div>
                                         <button type="submit" className="btn light-blue darken-4">
-                                            Send
+                                            Enviar
                                         </button>
                                     </form>
                                 </div>

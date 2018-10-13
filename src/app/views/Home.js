@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 
 class Home extends Component{
 
@@ -21,9 +20,26 @@ class Home extends Component{
     }
 
     login(e){
-        axios.post('/api/tasks/login', this.state)
-            .then(M.toast({html: 'User or Password incorrect'}))
-            .catch(err => console.error(err));
+        fetch('/api/tasks/login', {
+            method: 'POST',
+            body: JSON.stringify(this.state),
+            headers:{
+                'Accept': 'application/jason',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.status) {
+                M.toast({html: data.status});
+            } else {
+                if (data.ok) {
+                    this.props.history.push("/tasks");
+                }
+            }
+        })
+        .catch(error => console.log(error));
+        e.preventDefault();
     }
 
     render(){
