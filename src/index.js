@@ -17,6 +17,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Routes
 app.use('/api/tasks', require('./routes/task.routes'));
 
+app.use('/api/yo', require('./routes/richard.routes'));
+
 // Static files
 app.use(express.static(path.join(__dirname, 'public')))
 

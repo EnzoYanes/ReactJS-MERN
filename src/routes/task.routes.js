@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 
-const Task = require('../models/task');
+const task = require('../dao/task.dao')
+//const Task = require('../models/task');
 const User = require('../models/user');
 
 function generateToken(user) {
@@ -23,12 +24,7 @@ router.get('/:id', async (req,res) => {
     res.json(task);
 });
 
-router.post('/', async(req, res) => {
-    const {title, description} = req.body;
-    const task = new Task({title, description});
-    await task.save();
-    res.json({status: 'Task Saved'});
-});
+router.post('/', task.insert);
 
 router.put('/:id', async(req, res) => {
     const { title, description } = req.body;
