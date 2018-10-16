@@ -101,14 +101,6 @@ class Tasks extends Component{
     render() {
         return (
             <div className="App">
-                {/* NAVIGATION */}
-                <nav className="light-blue darken-4">
-                    <div className="container">
-                        <a className="brand-logo" href="/">MERN Stack</a>
-                        <a className="brand-logo right" href="/" >Salir</a>
-                    </div>
-                </nav>
-
                 <div className="container">
                     <div className="row">
                         <div className="col s5">

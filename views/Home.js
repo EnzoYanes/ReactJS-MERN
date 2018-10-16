@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 
 class Home extends Component{
 
@@ -53,7 +54,7 @@ class Home extends Component{
                             <input name="password" value={this.state.password} onChange={this.handleChange} type="password" placeholder="password" />
 
                             <button type="submit" className="btn light-blue darken-4">Iniciar</button>
-                            <a className="btn light-blue darken-4 right" href="#/register">Registrarse</a>
+                            <Link to={'/register'} className="btn light-blue darken-4 right">Registrarse</Link>
                         </form>
                     </div>
                 </div>
