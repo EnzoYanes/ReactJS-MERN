@@ -2,9 +2,9 @@ import React from 'react';
 import { render } from 'react-dom';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 
-import Tasks from './views/Tasks';
-import Home from './views/Home';
-import Register from './views/Register';
+import Tasks from './Tasks';
+import Home from './Home';
+import Register from './Register';
 
 render(
     <HashRouter>

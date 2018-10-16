@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "concurrently \"nodemon src/index.js\" \"webpack --mode development --watch\" ",
+    "start": "node server.js",
+    "dev": "concurrently \"nodemon server.js\" \"webpack --mode development --watch\" ",
     "webpack": "webpack --mode development --watch"
   },
   "keywords": [],
