@@ -20,7 +20,7 @@ class Register extends Component{
     }
 
     addUser(e){
-        fetch('/api/tasks/register', {
+        fetch('/api/user/register', {
             method: 'POST',
             body: JSON.stringify(this.state),
             headers:{

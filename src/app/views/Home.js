@@ -20,7 +20,7 @@ class Home extends Component{
     }
 
     login(e){
-        fetch('/api/tasks/login', {
+        fetch('/api/user/login', {
             method: 'POST',
             body: JSON.stringify(this.state),
             headers:{
