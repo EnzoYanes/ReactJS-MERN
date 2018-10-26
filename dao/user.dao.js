@@ -1,13 +1,5 @@
-const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-
-function generateToken(user) {
-    var u = {
-        _id: user._id,
-        username: user.username
-    };
-    return token = jwt.sign(u, 'secret', { expiresIn: 60*2 });
-}
+const utils = require('../services/utils');
 
 const register = async(req, res) => {
     const { username, password} = req.body;
@@ -32,7 +24,7 @@ const login = (req, res) => {
                 res.json({
                     ok: true,
                     user: usuario,
-                    token: generateToken(usuario)
+                    token: utils.createToken(usuario)
                 });
             }else{
                 res.json({status: 'Contraseña incorrecta'});
